@@ -370,11 +370,3 @@
 &spi_12 {
 	status = "disabled";
 };
-
-&firmware {
-	android {
-		fstab {
-			/delete-node/ vendor;
-		};
-	};
-};
