@@ -12,7 +12,7 @@ LGR='\033[1;32m'
 
 export OPT_FLAGS="-O3 -pipe -fvectorize -fslp-vectorize"
 
-export ARCH_FLAGS="-mtune=cortex-a53 -mcpu=kryo -marm"
+# export ARCH_FLAGS="-mtune=cortex-a53"
 
 export POLLY_FLAGS="-mllvm -polly \
 				-mllvm -polly-run-dce \
@@ -28,6 +28,7 @@ export WIPPER_POLLY=" \
 				-mllvm -enable-polly-aligned \
 				-mllvm -polly-allow-nonaffine"
 
+OPT_FLAGS="${OPT_FLAGS} ${POLLY_FLAGS} ${WIPPER_POLLY} ${ARCH_FLAGS}"
 export CLANG_TRIPLE="aarch64-linux-gnu-"
 export CROSS_COMPILE="${HOME}/build/z2/gcc-linaro-7.2.1-2017.11-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-"
 export CLANG_TCHAIN="${HOME}/build/z2/dtc-7.0-tmp/out/7.0/bin/clang"
@@ -44,8 +45,7 @@ make_a_fucking_defconfig()
 compile() 
 {
 	echo -e ${LGR} "############### Compiling kernel ################${NC}"
-	make CC="${CLANG_TCHAIN}" O=$objdir -j8 \
-	OPT_FLAGS="${OPT_FLAGS} ${ARCH_FLAGS} ${POLLY_FLAGS} ${WIPPER_POLLY}" \
+	make CC="${CLANG_TCHAIN} ${OPT_FLAGS}" O=$objdir -j8 \
 	Image.gz-dtb
 }
 ramdisk() 
