@@ -10,7 +10,8 @@ NC='\033[0m'
 RED='\033[0;31m'
 LGR='\033[1;32m'
 
-export OPT_FLAGS="-O3 -pipe -fvectorize -fslp-vectorize"
+export OPT_FLAGS="-O3 -pipe -fvectorize -fslp-vectorize \
+				-freroll-loops -funroll-loops"
 
 # export ARCH_FLAGS="-mtune=cortex-a53"
 
@@ -24,9 +25,7 @@ export POLLY_FLAGS="-mllvm -polly \
 export WIPPER_POLLY=" \
 				-mllvm -polly-parallel \
 				-mllvm -polly-delinearize \
-				-mllvm -polly-optimizer=isl \
-				-mllvm -enable-polly-aligned \
-				-mllvm -polly-allow-nonaffine"
+				-mllvm -polly-optimizer=isl"
 
 OPT_FLAGS="${OPT_FLAGS} ${POLLY_FLAGS} ${WIPPER_POLLY} ${ARCH_FLAGS}"
 export CLANG_TRIPLE="aarch64-linux-gnu-"
