@@ -26,7 +26,7 @@ export POLLY_FLAGS="-mllvm -polly \
 				-mllvm -polly-vectorizer=stripmine"
 
 export CLANG_TRIPLE="aarch64-linux-gnu-"
-export CROSS_COMPILE="${HOME}/build/z2/gcc-linaro-7.2.1-2017.11-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-"
+export CROSS_COMPILE="${HOME}/build/z2/gcc-8/bin/aarch64-linux-gnu-"
 export CLANG_TCHAIN="${HOME}/build/z2/dtc-7.0-tmp/out/7.0/bin/clang"
 export objdir="${kernel_dir}/out"
 export builddir="${kernel_dir}/build"
